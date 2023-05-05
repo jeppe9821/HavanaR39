@@ -5,7 +5,7 @@ Havana is an emulator developed by [Quackster/Havana](https://github.com/Quackst
 
 Unfortunately ClassicHabbo closed at the end of 2022 for a variety of reasons (including but not limited to lack of interest in running a retro from Quackster and difficulties putting together a team of people who can help out with hotel management). Quackster thankfully released all the core Havana files for running the V31 client, minus the support for the V39 Flash client and some other CH-specific features
 
-We've restored the missing CH features to this repository, with some additional features
+We've restored some of the missing CH features, with some additional features
 
 ❗ This repository will not be continuously updated and will be as is
 
