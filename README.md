@@ -19,7 +19,6 @@ Same as [the original project](https://github.com/Quackster/Havana), plus -
 - Country badges (CH feature)
 - New rare cycle (for more ease of use)
 - Improvements to the catalogue (ordering, missing pictures and missing text has been fixed to be more true to 2009)
-- ~~external_texts, productdata and furnidata is now being processed through SQL~~ (currently not working)
 - user:Username can be used when searching for a specific owner in the navigator search tool
 
 	![image](https://user-images.githubusercontent.com/41788480/236339922-82ccd749-6e4f-478d-95c6-d2f549ca2e1f.png)
