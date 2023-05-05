@@ -1,24 +1,37 @@
-# Compiled class file
-*.class
+.inertia.toml
+.secrets
+.kepler-secrets
+.gradle/
+.idea/
+/out/
+**.iml
+/build/
+/bin/
+/tmp/
+/cmake-build-debug/
+.idea/workspace.xml
+/*.jar
+gradlew.bat
+run.bat
 
-# Log file
-*.log
+/tools/db/schema.sql
 
-# BlueJ files
-*.ctxt
+config.ini
+webserver-config.ini
+locale.ini
+game.ini
+server.ini
+log4j.properties
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+Kepler-Server-all.jar
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+server.log
+error.log
+.env
+log4j.web.properties
+server.web.log
+error.web.log
+Havana-Server/src/main/java/META-INF/MANIFEST.MF
+Havana-Web/src/main/java/META-INF/MANIFEST.MF
+Havana-Server/META-INF/MANIFEST.MF
+Havana-Web/tools/
