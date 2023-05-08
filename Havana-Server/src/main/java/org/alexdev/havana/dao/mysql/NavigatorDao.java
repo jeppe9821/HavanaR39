@@ -221,8 +221,7 @@ public class NavigatorDao {
             sqlConnection = Storage.getStorage().getConnection();
             preparedStatement = Storage.getStorage().prepare("SELECT * FROM rooms LEFT JOIN users ON rooms.owner_id = users.id WHERE " + excludePublicRooms + " visitors_now > 0 ORDER BY visitors_now DESC, rooms.rating DESC LIMIT ? ", sqlConnection);
 
-            preparedStatement.setInt(1, player.getDetails().getId());
-            preparedStatement.setInt(2, limit);
+            preparedStatement.setInt(1, limit);
             resultSet = preparedStatement.executeQuery();
 
             //public NavigatorCategory(int id, String name, boolean publicSpaces, boolean allowTrading, int minimumRoleAccess, int minimumRoleSetFlat) {
