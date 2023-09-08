@@ -3,6 +3,7 @@ package org.alexdev.havana.messages.incoming.user.badges;
 import org.alexdev.havana.game.badges.Badge;
 import org.alexdev.havana.game.player.Player;
 import org.alexdev.havana.messages.outgoing.user.badges.USERBADGE;
+import org.alexdev.havana.messages.outgoing.user.badges.USERBADGE_FLASH;
 import org.alexdev.havana.messages.types.MessageEvent;
 import org.alexdev.havana.server.netty.streams.NettyRequest;
 
@@ -26,7 +27,12 @@ public class SETBADGE implements MessageEvent {
 
         // Notify users of badge updates
         if (player.getRoomUser().getRoom() != null) {
-            player.getRoomUser().getRoom().send(new USERBADGE(player.getDetails().getId(), player.getBadgeManager().getEquippedBadges()));
+            if(player.flash) {
+                player.getRoomUser().getRoom().send(new USERBADGE_FLASH(player.getDetails().getId(), player.getBadgeManager().getEquippedBadges()));
+            }
+            else {
+                player.getRoomUser().getRoom().send(new USERBADGE(player.getDetails().getId(), player.getBadgeManager().getEquippedBadges()));
+            }
         }
         
         player.getBadgeManager().refreshBadges();
