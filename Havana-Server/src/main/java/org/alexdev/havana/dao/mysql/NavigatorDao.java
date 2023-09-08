@@ -287,6 +287,45 @@ public class NavigatorDao {
         return rooms;
     }
 
+    public static List<Room> getRopularRoomsWithEmpty(int limit, boolean includePublicRooms, int category) {
+        List<Room> rooms = new ArrayList<>();
+
+        Connection sqlConnection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        String excludePublicRooms = " owner_id > 0 AND";
+
+        if (includePublicRooms) {
+            excludePublicRooms = "";
+        }
+
+        try {
+            sqlConnection = Storage.getStorage().getConnection();
+            preparedStatement = Storage.getStorage().prepare("SELECT * FROM rooms LEFT JOIN users ON rooms.owner_id = users.id WHERE " + excludePublicRooms + " category = ? ORDER BY visitors_now DESC, rooms.rating DESC LIMIT ? ", sqlConnection);
+
+            preparedStatement.setInt(1, category);
+            preparedStatement.setInt(2, limit);
+            resultSet = preparedStatement.executeQuery();
+
+            //public NavigatorCategory(int id, String name, boolean publicSpaces, boolean allowTrading, int minimumRoleAccess, int minimumRoleSetFlat) {
+            while (resultSet.next()) {
+                Room room = new Room();
+                RoomDao.fill(room.getData(), resultSet);
+                rooms.add(room);
+            }
+
+        } catch (Exception e) {
+            Storage.logError(e);
+        } finally {
+            Storage.closeSilently(resultSet);
+            Storage.closeSilently(preparedStatement);
+            Storage.closeSilently(sqlConnection);
+        }
+
+        return rooms;
+    }
+
 
     public static int createRoom(int ownerId, String roomName, String roomModel, boolean roomShowName, int accessType) throws SQLException {
         Connection sqlConnection = null;

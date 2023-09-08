@@ -208,22 +208,11 @@ public class PlayerDetails {
 
 
     public void resetNextHandout() {
-        var dailyCoins = GameConfiguration.getInstance().getInteger("daily.credits.amount");
-
-        if (dailyCoins > 0) {
+        if (GameConfiguration.getInstance().getInteger("daily.credits.amount") > 0 && isCreditsEligible) {
             this.nextHandout = DateUtil.getCurrentTimeSeconds() + GameConfiguration.getInstance().getInteger("daily.credits.wait.time");
-        }
-
-        resetCoinScheduler();
-    }
-
-    public void resetCoinScheduler() {
-        var schedulerAmount = GameConfiguration.getInstance().getInteger("credits.scheduler.amount");
-        if(schedulerAmount > 0) {
-            var schedulerInterval = GameConfiguration.getInstance().getLong("credits.scheduler.interval");
-            var timeUnit = TimeUnit.valueOf(GameConfiguration.getInstance().getString("credits.scheduler.timeunit"));
-            var schedulerIntervalSeconds = timeUnit.toSeconds(schedulerInterval);
-            this.nextHandout = DateUtil.getCurrentTimeSeconds() + schedulerIntervalSeconds;
+        } else if(!isCreditsEligible) {
+            TimeUnit unit = TimeUnit.valueOf(GameConfiguration.getInstance().getString("credits.scheduler.timeunit"));
+            this.nextHandout = DateUtil.getCurrentTimeSeconds() + unit.toSeconds(GameConfiguration.getInstance().getInteger("credits.scheduler.interval"));
         }
     }
 

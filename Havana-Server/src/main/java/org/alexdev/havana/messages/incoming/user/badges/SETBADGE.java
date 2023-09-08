@@ -10,6 +10,8 @@ import org.alexdev.havana.server.netty.streams.NettyRequest;
 public class SETBADGE implements MessageEvent {
     @Override
     public void handle(Player player, NettyRequest reader) throws Exception {
+        System.out.println("We're unequiping all badges");
+
         // Unequip all previous badges
         for (Badge badge : player.getBadgeManager().getBadges()) {
             player.getBadgeManager().changeBadge(badge.getBadgeCode(), false, 0);
@@ -19,12 +21,15 @@ public class SETBADGE implements MessageEvent {
         while (reader.contents().length() > 0) {
             int slotId = reader.readInt();
             String badgeCode = reader.readString();
+            System.out.println("We're adding new badges, slotId: " + slotId + " badgeCode: " + badgeCode);
 
             if (slotId > 0 && slotId < 6 && badgeCode.length() > 0) {
                 player.getBadgeManager().changeBadge(badgeCode, true, slotId);
+                System.out.println("slotid > 0 && slotid < 6 && badgeCode.length() > 0");
             }
         }
 
+        System.out.println("We're notifying users of badge updates " + player.getBadgeManager().getEquippedBadges().size());
         // Notify users of badge updates
         if (player.getRoomUser().getRoom() != null) {
             if(player.flash) {
@@ -34,7 +39,8 @@ public class SETBADGE implements MessageEvent {
                 player.getRoomUser().getRoom().send(new USERBADGE(player.getDetails().getId(), player.getBadgeManager().getEquippedBadges()));
             }
         }
-        
+
+        System.out.println("We're refreshing badges");
         player.getBadgeManager().refreshBadges();
         player.getBadgeManager().saveQueuedBadges();
     }

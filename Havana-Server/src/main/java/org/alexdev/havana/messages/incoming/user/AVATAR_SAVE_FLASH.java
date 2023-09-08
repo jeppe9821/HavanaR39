@@ -14,6 +14,7 @@ import org.alexdev.havana.game.player.Wardrobe;
 import org.alexdev.havana.game.room.RoomManager;
 import org.alexdev.havana.messages.outgoing.rooms.user.FIGURE_CHANGE;
 import org.alexdev.havana.messages.outgoing.user.AVATAR_SAVE_SEND_FLASH;
+import org.alexdev.havana.messages.outgoing.user.USER_OBJECT;
 import org.alexdev.havana.messages.types.MessageEvent;
 import org.alexdev.havana.server.netty.streams.NettyRequest;
 import org.alexdev.havana.util.ValidationUtil;
@@ -24,19 +25,22 @@ public class AVATAR_SAVE_FLASH implements MessageEvent {
         var gender = reader.readString().toUpperCase();
         var look = reader.readString();
 
-        if(!FigureManager.getInstance().validateFigure(look, gender, player.getDetails().hasClubSubscription())) {
-           return;
+        if (!FigureManager.getInstance().validateFigure(look, gender, player.getDetails().hasClubSubscription())) {
+            return;
         }
 
         player.getDetails().setFigure(look);
         player.getDetails().setSex(gender);
 
-        player.getRoomUser().refreshAppearance();
-
         PlayerDao.saveDetails(player.getDetails().getId(), look, player.getDetails().getPoolFigure(), gender);
 
-        //Set achivement for changing avatar if needed
+        // Send refresh to user
+        player.send(new USER_OBJECT(player.getDetails()));
 
-        player.send(new FIGURE_CHANGE(player.getRoomUser().getInstanceId(), player.getDetails()));
+        // Send refresh to room if inside room
+        if (player.getRoomUser().getRoom() != null) {
+            player.getRoomUser().getRoom().send(new FIGURE_CHANGE(player.getRoomUser().getInstanceId(), player.getDetails()));
+        }
     }
 }
+     

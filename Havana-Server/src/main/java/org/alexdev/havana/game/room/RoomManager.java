@@ -266,7 +266,7 @@ public class RoomManager {
     }
 
     public List<Room> getRoomsByCategory(int categoryId) {
-        var roomList = RoomManager.getInstance().replaceQueryRooms(NavigatorDao.getRopularRooms(30, false, categoryId));
+        var roomList = RoomManager.getInstance().replaceQueryRooms(NavigatorDao.getRopularRoomsWithEmpty(30, false, categoryId));
         return roomList;
     }
 

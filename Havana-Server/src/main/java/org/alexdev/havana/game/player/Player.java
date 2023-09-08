@@ -62,6 +62,8 @@ public class Player extends Entity {
     private final PlayerDetails details;
     private final RoomPlayer roomEntity;
 
+    private List<String> chatHistory = new ArrayList<String>();
+
     private Logger log;
     private Messenger messenger;
     private Inventory inventory;
@@ -262,7 +264,6 @@ public class Player extends Entity {
 
         // Guide checks
         this.guideManager.setGuide(GuideManager.getInstance().isGuide(this));
-
         if (GameConfiguration.getInstance().getBoolean("tutorial.enabled")) {
             if (this.guideManager.isGuide()) {
                 this.guideManager.setHasTutorial(false);
@@ -776,5 +777,17 @@ public class Player extends Entity {
 
     public void setHasBeenPixelsWarned(boolean b) {
         this.hasBeenPixelsWarned = b;
+    }
+
+    public List<String> getChatHistory() {
+        return this.chatHistory;
+    }
+
+    public void addChat(String message) {
+        this.chatHistory.add(message);
+    }
+
+    public void onEnterRoom() {
+        chatHistory.clear();
     }
 }

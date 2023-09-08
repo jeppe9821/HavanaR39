@@ -95,6 +95,16 @@ public class GameScheduler implements Runnable {
                         if (this.creditsHandoutQueue.stream().noneMatch(entry -> entry.getKey() == player)) {
                             this.queuePlayerCredits(player, credits);
                             player.getDetails().setCreditsEligible(false);
+                            player.getDetails().resetNextHandout();
+                        }
+                    }
+                } else if(DateUtil.getCurrentTimeSeconds() > player.getDetails().getNextHandout() && player.getDetails().getNextHandout() > 0) {
+                    int credits = GameConfiguration.getInstance().getInteger("credits.scheduler.amount");
+
+                    if (credits > 0) {
+                        if (this.creditsHandoutQueue.stream().noneMatch(entry -> entry.getKey() == player)) {
+                            this.queuePlayerCredits(player, credits);
+                            player.getDetails().resetNextHandout();
                         }
                     }
                 }

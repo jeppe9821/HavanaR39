@@ -51,7 +51,7 @@ public abstract class RoomEntity {
     private LinkedList<Position> path;
 
     private BlockingQueue<MessageComposer> packetQueueAfterRoomLeave;
-    private CopyOnWriteArrayList<String> chatMessages;
+    public CopyOnWriteArrayList<String> chatMessages;
 
     private int instanceId;
     private Item lastItemInteraction;

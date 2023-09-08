@@ -138,6 +138,8 @@ public class RoomEntityManager {
 
         Player player = (Player) entity;
 
+        player.onEnterRoom();
+
         player.send(new ROOM_READY(this.room.getId(), this.room.getModel().getName()));
 
         if (this.room.getData().getWallpaper() > 0) {
