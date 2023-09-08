@@ -66,7 +66,7 @@ Without any changes, Havana will run under localhost/127.0.0.1 and should work o
 1. Download and install all of the prerequisites. Make a note of the root password you set for MariaDB
 2. Open a Command Prompt window and enter the following command to clone this repository -
 ```
-git clone https://github.com/JeppsonDev/Havana.git
+git clone https://github.com/JeppsonDev/HavanaR39.git
 ```
 3. Download [www.zip](https://www.mediafire.com/file/0w0lsy335vyrh1w/www.zip/file) and extract it to `tools\www` in the Havana directory
 4. Open MySQL Client (will be a Start Menu entry) and enter your root password
