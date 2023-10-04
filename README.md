@@ -45,7 +45,7 @@ Same as [the original project](https://github.com/quackster/Havana#requirements)
 ### Summary
 
 1. Clone the repository
-2. Download www.zip and copy the contents to `tools/www`
+2. Download [www.zip](https://www.mediafire.com/file/0w0lsy335vyrh1w/www.zip/file) and copy the contents to `tools/www`
 3. Import havana.sql
 4. Build and run Havana-Web and Havana-Server in your favourite IDE
 
