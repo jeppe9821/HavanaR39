@@ -7,7 +7,7 @@ Unfortunately ClassicHabbo closed at the end of 2022 for a variety of reasons (i
 
 We've restored some of the missing CH features, with some additional features
 
-❗ This repository will not be continuously updated and will be as is
+❗ This repository will not be continuously updated and will be as is!
 
 # Features
 
